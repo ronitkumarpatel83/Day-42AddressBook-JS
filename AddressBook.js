@@ -82,13 +82,16 @@ let flag = true;
 var addressBookList = []
 
 while(flag == true){
-    const option = Number(prompt("Chosse Your option: \n1.For add new Contact. \n2.Edit Contact Using Name. \nAny Number To Exit : " ))
+    const option = Number(prompt("Chosse Your option: \n1.For add new Contact. \n2.Edit Contact Using Name. \n3. Delete Contact Using Name \nAny Number To Exit" ))
     switch(option){
         case 1:
             addEntries(addressBookList);
             break;
         case 2:
             editEntries(addressBookList);
+            break;
+        case 3:
+            deleteEntries(addressBookList);
             break;
         default:
             flag = false;
@@ -128,14 +131,22 @@ function editEntries(addressBookList){
         try {
             if(element.firstName===name){
                 element.firstName = prompt("Edit First Name: ")
-            }
-            else{
-                console.log("This name is not exist in the list");
+                console.log(" Data successfully Edited");
             }
         } catch (e) {
             console.error(e)
+        } 
+    });
+    console.log(addressBookList.toString());
+}
+
+function deleteEntries(addressBookList){
+    const name = prompt("Enter Name Which U Want To Delete: ")
+    addressBookList.forEach(element =>{
+        if (element.firstName===name){
+            addressBookList.pop(element);
+            console.log("Data SuccessFully Deleted");
         }
-    
     });
     console.log(addressBookList.toString());
 }
