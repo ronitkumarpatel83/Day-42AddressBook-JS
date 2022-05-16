@@ -74,7 +74,7 @@ class AddressBook{
     }
 
     toString(){
-        return "FirstName="+this.firstName+", lastName="+this.lastName+", Address="+this.address+", City="+this.city+", State="+this.state+", Zip="+this.zip+", PhoneNo="+this.phoneNum+", Email="+this.email;
+        return "\nFirstName = "+this.firstName+" \nlastName = "+this.lastName+" \nAddress = "+this.address+" \nCity = "+this.city+" \nState = "+this.state+" \nZip = "+this.zip+" \nPhoneNo = "+this.phoneNum+" \nEmail = "+this.email;
     }
 }
 const prompt = require('prompt-sync')();
@@ -83,7 +83,7 @@ var addressBookList = []
 
 while(flag == true){
     const option = Number(prompt("Chosse Your option: \n1. For add new Contact. \n2. Edit Contact Using Name. \n3. Delete Contact Using Name"+
-                                 "\n4. For Get Number Of Contact In Book \nAny Number To Exit" ))
+                                 "\n4. For Get Number Of Contact In Book. \n5. For Serch By City And State. \nAny Number To Exit" ))
     switch(option){
         case 1:
             addEntries(addressBookList);
@@ -97,6 +97,9 @@ while(flag == true){
         case 4:
             sizeOfBook(addressBookList);
             break;
+        case 5:
+            searchContact(addressBookList);
+            break;
         default:
             flag = false;
     }
@@ -104,6 +107,11 @@ while(flag == true){
 
 function addEntries(addressBookList){ 
     try {
+        let addressBook1 = new AddressBook("Ronit","Patel","RLD","SNG","Odisha","123456","91 1234567890","ronitkp12@gmail.com");
+        let addressBook2= new AddressBook("Swagatika","Behera","","blngr","karnataka","654321","91 0987654321","swagatika12@gamil.com");
+        addressBookList.push(addressBook1);
+        addressBookList.push(addressBook2);
+
         const sizeOfBookStr = prompt('Enter Size Of Book: ');
         const sizeOfBook = Number(sizeOfBookStr)
         let i = 0;
@@ -165,4 +173,31 @@ function deleteEntries(addressBookList){
 
 function sizeOfBook(addressBookList){
     console.log(`${addressBookList.length} Entries In Our AddressBook`);
+}
+
+function searchContact(addressBookList){
+    console.log("Select Your Option, \n1. Search By City. \n2. Search By State");
+    const option = Number(prompt("Select Ur Option"))
+    switch(option){
+        case 1:
+            const city = prompt("Enter Ur City Name: ");
+            filtteredAddressBook = addressBookList.filter(filterValueByCity);
+            
+            function filterValueByCity(element){
+                if(element.city === city)
+                    return element; 
+            }
+            console.log(filtteredAddressBook.toString());
+            break;
+        case 2:
+            const state = prompt("Enter Ur state Name: ");
+            filtteredAddressBook = addressBookList.filter(filterValueByState);
+            
+            function filterValueByState(element){
+                if(element.state === state)
+                    return element; 
+            }
+            console.log(filtteredAddressBook.toString());
+            break;
+    }
 }
