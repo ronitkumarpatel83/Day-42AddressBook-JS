@@ -59,7 +59,7 @@ class AddressBook{
  
     get phoneNum(){return this._phoneNum}
     set phoneNum(phoneNum){
-        let nameRegex = RegExp('^[0-9]{1,3}[ ][0-9]{10}')
+        let nameRegex = RegExp('^[0-9]{2}[: :][0-9]{10}')
         if(nameRegex.test(phoneNum))
             this._phoneNum = phoneNum;
         else throw "Incorrect Phone Num..!!"
@@ -77,27 +77,66 @@ class AddressBook{
         return "FirstName="+this.firstName+", lastName="+this.lastName+", Address="+this.address+", City="+this.city+", State="+this.state+", Zip="+this.zip+", PhoneNo="+this.phoneNum+", Email="+this.email;
     }
 }
+const prompt = require('prompt-sync')();
+let flag = true;
+var addressBookList = []
 
-try {
-    let addressBookList = new Array();
-    const prompt = require('prompt-sync')();
-    const sizeOfBookStr = prompt('Enter Size Of Book: ');
-    const sizeOfBook = Number(sizeOfBookStr)
-    let i = 0;
-    while(i<sizeOfBook){
-        firstName = prompt("Enter First Name: ");
-        lastName = prompt("Enter Last Name: ");
-        address = prompt("Enter Address: ");
-        city = prompt("Enter City: ");
-        state = prompt("Enter State: ");
-        zip = prompt("Enter Zip: ");
-        phoneNum = prompt("Enter Phone Number: ");
-        email = prompt("Enter Email Address: ");
-        let addressBook = new AddressBook(firstName,lastName,address,city,state,zip,phoneNum,email);
-        addressBookList.push(addressBook.toString());
-        i++;
+while(flag == true){
+    const option = Number(prompt("Chosse Your option: \n1.For add new Contact. \n2.Edit Contact Using Name. \nAny Number To Exit : " ))
+    switch(option){
+        case 1:
+            addEntries(addressBookList);
+            break;
+        case 2:
+            editEntries(addressBookList);
+            break;
+        default:
+            flag = false;
     }
-    console.log(addressBookList);
-} catch (e) {
-    console.error(e)
 }
+
+function addEntries(addressBookList){ 
+    try {
+        const sizeOfBookStr = prompt('Enter Size Of Book: ');
+        const sizeOfBook = Number(sizeOfBookStr)
+        let i = 0;
+        while(i<sizeOfBook){
+            firstName = prompt("Enter First Name: ");
+            lastName = prompt("Enter Last Name: ");
+            address = prompt("Enter Address: ");
+            city = prompt("Enter City: ");
+            state = prompt("Enter State: ");
+            zip = prompt("Enter Zip: ");
+            phoneNum = prompt("Enter Phone Number: ");
+            email = prompt("Enter Email Address: ");
+            
+            let addressBook = new AddressBook(firstName,lastName,address,city,state,zip,phoneNum,email);
+            addressBookList.push(addressBook);
+            i++;
+        }
+        console.log(addressBookList.toString());
+    } 
+    catch (e) {
+        console.error(e)
+    }
+}
+
+function editEntries(addressBookList){
+    
+    const name = prompt("Enter Name To Search: ")
+    addressBookList.forEach(element => {
+        try {
+            if(element.firstName===name){
+                element.firstName = prompt("Edit First Name: ")
+            }
+            else{
+                console.log("This name is not exist in the list");
+            }
+        } catch (e) {
+            console.error(e)
+        }
+    
+    });
+    console.log(addressBookList.toString());
+}
+
