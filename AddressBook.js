@@ -188,16 +188,18 @@ function searchContact(addressBookList){
                     return element; 
             }
             console.log(filtteredAddressBook.toString());
+            console.log(`Number of contact in city ${city} is ${filtteredAddressBook.length}.` );
             break;
         case 2:
             const state = prompt("Enter Ur state Name: ");
-            filtteredAddressBook = addressBookList.filter(filterValueByState);
+            filtteredAddressBook1 = addressBookList.filter(filterValueByState);
             
             function filterValueByState(element){
                 if(element.state === state)
                     return element; 
             }
-            console.log(filtteredAddressBook.toString());
+            console.log(filtteredAddressBook1.toString());
+            console.log(`Number of contact in city ${city} is ${filtteredAddressBook1.length}.` );
             break;
     }
 }
