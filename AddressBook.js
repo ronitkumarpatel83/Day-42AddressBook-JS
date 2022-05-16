@@ -83,7 +83,8 @@ var addressBookList = []
 
 while(flag == true){
     const option = Number(prompt("Chosse Your option: \n1. For add new Contact. \n2. Edit Contact Using Name. \n3. Delete Contact Using Name"+
-                                 "\n4. For Get Number Of Contact In Book. \n5. For Serch By City And State. \nAny Number To Exit" ))
+                                 "\n4. For Get Number Of Contact In Book. \n5. For Serch By City And State. \n6. For Sort List By First Name"+
+                                 "\nAny Number To Exit" ))
     switch(option){
         case 1:
             addEntries(addressBookList);
@@ -99,6 +100,9 @@ while(flag == true){
             break;
         case 5:
             searchContact(addressBookList);
+            break;
+        case 6:
+            sortByName(addressBookList);
             break;
         default:
             flag = false;
@@ -202,4 +206,13 @@ function searchContact(addressBookList){
             console.log(`Number of contact in city ${city} is ${filtteredAddressBook1.length}.` );
             break;
     }
+}
+
+function sortByName(addressBookList){
+    sortList = addressBookList.sort((a,b) => {
+                if(a._firstName<b._firstName) return -1;
+                if(a._firstName>b._firstName) return 1;
+                return 0
+    });
+    console.log(sortList.toString());
 }
