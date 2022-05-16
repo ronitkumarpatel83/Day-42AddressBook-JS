@@ -82,7 +82,8 @@ let flag = true;
 var addressBookList = []
 
 while(flag == true){
-    const option = Number(prompt("Chosse Your option: \n1.For add new Contact. \n2.Edit Contact Using Name. \n3. Delete Contact Using Name \nAny Number To Exit" ))
+    const option = Number(prompt("Chosse Your option: \n1. For add new Contact. \n2. Edit Contact Using Name. \n3. Delete Contact Using Name"+
+                                 "\n4. For Get Number Of Contact In Book \nAny Number To Exit" ))
     switch(option){
         case 1:
             addEntries(addressBookList);
@@ -92,6 +93,9 @@ while(flag == true){
             break;
         case 3:
             deleteEntries(addressBookList);
+            break;
+        case 4:
+            sizeOfBook(addressBookList);
             break;
         default:
             flag = false;
@@ -149,5 +153,9 @@ function deleteEntries(addressBookList){
         }
     });
     console.log(addressBookList.toString());
+}
+
+function sizeOfBook(addressBookList){
+    console.log(`${addressBookList.length} Entries In Our AddressBook`);
 }
 
