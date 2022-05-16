@@ -108,7 +108,7 @@ function addEntries(addressBookList){
         const sizeOfBook = Number(sizeOfBookStr)
         let i = 0;
         while(i<sizeOfBook){
-            firstName = prompt("Enter First Name: ");
+            newfirstName = prompt("Enter First Name: ");
             lastName = prompt("Enter Last Name: ");
             address = prompt("Enter Address: ");
             city = prompt("Enter City: ");
@@ -116,9 +116,17 @@ function addEntries(addressBookList){
             zip = prompt("Enter Zip: ");
             phoneNum = prompt("Enter Phone Number: ");
             email = prompt("Enter Email Address: ");
-            
-            let addressBook = new AddressBook(firstName,lastName,address,city,state,zip,phoneNum,email);
-            addressBookList.push(addressBook);
+
+            let addressBook = new AddressBook(newfirstName,lastName,address,city,state,zip,phoneNum,email);
+            let flag = true;
+            addressBookList.forEach(element =>{
+                if (element.firstName == newfirstName){
+                    flag = false;
+                }
+            })
+            if(flag == true)
+                addressBookList.push(addressBook);
+            else console.log("Data Already Exist Try Diffrent Name.");
             i++;
         }
         console.log(addressBookList.toString());
@@ -158,4 +166,3 @@ function deleteEntries(addressBookList){
 function sizeOfBook(addressBookList){
     console.log(`${addressBookList.length} Entries In Our AddressBook`);
 }
-
