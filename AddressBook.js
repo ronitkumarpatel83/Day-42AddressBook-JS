@@ -84,7 +84,7 @@ var addressBookList = []
 while(flag == true){
     const option = Number(prompt("Chosse Your option: \n1. For add new Contact. \n2. Edit Contact Using Name. \n3. Delete Contact Using Name"+
                                  "\n4. For Get Number Of Contact In Book. \n5. For Serch By City And State. \n6. For Sort List By First Name"+
-                                 "\nAny Number To Exit" ))
+                                 "\n7. Sorting List Option \nAny Number To Exit" ))
     switch(option){
         case 1:
             addEntries(addressBookList);
@@ -103,6 +103,9 @@ while(flag == true){
             break;
         case 6:
             sortByName(addressBookList);
+            break;
+        case 7:
+            sort(addressBookList);
             break;
         default:
             flag = false;
@@ -215,4 +218,35 @@ function sortByName(addressBookList){
                 return 0
     });
     console.log(sortList.toString());
+}
+
+function sort(addressBookList){
+    console.log("Select Sorting Option \n1. sort by City. \n2. sort by State. \n3. sort by Zip");
+    let option = Number(prompt("select Ur Option: "))
+    switch(option){
+        case 1:
+            sortListByCity = addressBookList.sort(function(a,b) {
+                if(a._city<b._city) return -1;
+                if(a._city>b._city) return 1;
+                return 0
+            });
+            console.log(sortListByCity.toString());
+            break;
+        case 2:
+            sortListByState = addressBookList.sort((a,b) => {
+                if(a._state<b._state) return -1;
+                if(a._state>b._state) return 1;
+                return 0
+            });
+            console.log(sortListByState.toString());
+            break;
+        case 3:
+            sortListByZip = addressBookList.sort((a,b) => {
+                if(a._zip<b._zip) return -1;
+                if(a._zip>b._zip) return 1;
+                return 0
+            });
+            console.log(sortListByZip.toString());
+            break;
+    }
 }
